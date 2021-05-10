@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./dice.css";
 
-const Dice = props => {
-  let [roll, setRoll] = useState([0, 0, 0, 0, 0]);
+const Dice = ({ roll, setRoll }) => {
   let [hold, setHold] = useState([false, false, false, false, false]);
   let [rollCount, setRollCount] = useState(0);
   let [disableRoll, setDisableRoll] = useState(false);
@@ -17,10 +16,10 @@ const Dice = props => {
   };
 
   const handleNewHold = index => () => {
-    let temp = new Array(...hold)
-    temp[index] = !temp[index]
-    setHold(temp)
-  }
+    let temp = new Array(...hold);
+    temp[index] = !temp[index];
+    setHold(temp);
+  };
 
   const newRoll = (current, fixed) => {
     let output = [0, 0, 0, 0, 0];
@@ -37,20 +36,22 @@ const Dice = props => {
       <div>
         {roll.map((val, i) => (
           <div key={`dice-${i}`} className="dice-box">
-            {val ?
+            {val ? (
               <>
-            <h3>{val}</h3>
-            <button onClick={handleNewHold(i)} disable={disableRoll}>
-              Hold
-            </button>
-            </>
-            : null
-          }
+                <h3>{val}</h3>
+                <button
+                  onClick={handleNewHold(i)}
+                  disable={disableRoll.toString()}
+                >
+                  {hold[i] ? 'Roll' : 'Hold' }
+                </button>
+              </>
+            ) : null}
           </div>
         ))}
       </div>
       <div>
-        <button onClick={handleNewRoll} disable={disableRoll}>
+        <button onClick={handleNewRoll} disable={disableRoll.toString()}>
           {rollCount < 3 ? `Roll ${rollCount}` : `No Rolls Remaining`}
         </button>
       </div>
