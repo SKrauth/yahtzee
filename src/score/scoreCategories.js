@@ -4,10 +4,10 @@ const sortDice = roll => {
 };
 
 const sumDice = roll => {
-  return roll.reduce((a, b) => a + b)
-}
+  return roll.reduce((a, b) => a + b);
+};
 
-const sumOfType = val => roll => roll.filter(num => num == val).length * val;
+const sumOfType = val => roll => roll.filter(num => num === val).length * val;
 
 const threeOfAKind = roll => {
   let score = 0;
@@ -41,7 +41,11 @@ const fourOfAKind = roll => {
 const fullHouse = roll => {
   let score = 0;
   let orderedDice = sortDice(roll);
-  if (orderedDice[0] === orderedDice[1] && orderedDice[3] === orderedDice[4]) {
+  if (
+    orderedDice[0] === orderedDice[1] &&
+    orderedDice[3] === orderedDice[4] &&
+    orderedDice[0] !== orderedDice[4]
+  ) {
     if (
       orderedDice[0] === orderedDice[2] ||
       orderedDice[2] === orderedDice[3]
@@ -57,27 +61,27 @@ const smallStraight = roll => {
   let orderedDice = sortDice(roll);
 
   if (
-    orderedDice[0] === orderedDice[1] + 1 &&
-    orderedDice[0] === orderedDice[2] + 2 &&
-    orderedDice[0] === orderedDice[3] + 3
+    orderedDice[0] + 1 === orderedDice[1] &&
+    orderedDice[0] + 2 === orderedDice[2] &&
+    orderedDice[0] + 3 === orderedDice[3]
   ) {
     score = 30;
   } else if (
-    orderedDice[1] === orderedDice[2] + 1 &&
-    orderedDice[1] === orderedDice[3] + 2 &&
-    orderedDice[1] === orderedDice[4] + 3
+    orderedDice[1] + 1 === orderedDice[2] &&
+    orderedDice[1] + 2 === orderedDice[3] &&
+    orderedDice[1] + 3 === orderedDice[4]
   ) {
     score = 30;
   } else if (
-    orderedDice[0] === orderedDice[1] + 1 &&
-    orderedDice[0] === orderedDice[3] + 2 &&
-    orderedDice[0] === orderedDice[4] + 3
+    orderedDice[0] + 1 === orderedDice[1] &&
+    orderedDice[0] + 2 === orderedDice[3] &&
+    orderedDice[0] + 3 === orderedDice[4]
   ) {
     score = 30;
   } else if (
-    orderedDice[0] === orderedDice[1] + 1 &&
-    orderedDice[0] === orderedDice[2] + 2 &&
-    orderedDice[0] === orderedDice[4] + 3
+    orderedDice[0] + 1 === orderedDice[1] &&
+    orderedDice[0] + 2 === orderedDice[2] &&
+    orderedDice[0] + 3 === orderedDice[4]
   ) {
     score = 30;
   }
@@ -89,10 +93,10 @@ const largeStraight = roll => {
   let orderedDice = sortDice(roll);
 
   if (
-    orderedDice[0] === orderedDice[1] + 1 &&
-    orderedDice[0] === orderedDice[2] + 2 &&
-    orderedDice[0] === orderedDice[3] + 3 &&
-    orderedDice[0] === orderedDice[4] + 4
+    orderedDice[0] + 1 === orderedDice[1] &&
+    orderedDice[0] + 2 === orderedDice[2] &&
+    orderedDice[0] + 3 === orderedDice[3] &&
+    orderedDice[0] + 4 === orderedDice[4]
   ) {
     score = 40;
   }
@@ -117,10 +121,10 @@ const yahtzee = roll => {
 };
 
 const chance = roll => {
-  return sumDice(roll)
-}
+  return sumDice(roll);
+};
 
-export default {
+const scoreCategories = {
   sumOfType,
   threeOfAKind,
   fourOfAKind,
@@ -130,3 +134,5 @@ export default {
   yahtzee,
   chance
 };
+
+export default scoreCategories;

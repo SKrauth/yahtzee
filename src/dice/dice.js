@@ -1,18 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./dice.css";
 
-const Dice = ({ roll, setRoll }) => {
-  let [hold, setHold] = useState([false, false, false, false, false]);
-  let [rollCount, setRollCount] = useState(0);
-  let [disableRoll, setDisableRoll] = useState(false);
-
+const Dice = ({ roll, setRoll, rollCount, setRollCount, hold, setHold }) => {
   const handleNewRoll = () => {
-    setDisableRoll(true);
     setRollCount(rollCount + 1);
-
-    // TODO: repeat 3x times w/ delay to include animation
     setRoll(newRoll(roll, hold));
-    setDisableRoll(rollCount < 3 ? false : true);
   };
 
   const handleNewHold = index => () => {
@@ -39,11 +31,8 @@ const Dice = ({ roll, setRoll }) => {
             {val ? (
               <>
                 <h3>{val}</h3>
-                <button
-                  onClick={handleNewHold(i)}
-                  disable={disableRoll.toString()}
-                >
-                  {hold[i] ? 'Roll' : 'Hold' }
+                <button onClick={handleNewHold(i)}>
+                  {hold[i] ? "Release" : "Hold"}
                 </button>
               </>
             ) : null}
@@ -51,7 +40,7 @@ const Dice = ({ roll, setRoll }) => {
         ))}
       </div>
       <div>
-        <button onClick={handleNewRoll} disable={disableRoll.toString()}>
+        <button onClick={handleNewRoll} disable={(rollCount > 3).toString()}>
           {rollCount < 3 ? `Roll ${rollCount}` : `No Rolls Remaining`}
         </button>
       </div>

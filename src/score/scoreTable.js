@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./score.css";
 
 const ScoreTable = ({ roll, section, submitScore }) => {
-  let [scored, setScored] = useState(new Array(section.length).fill(false));
+  let [scored, setScored] = useState(new Array(section.length).fill(-1));
 
   const handleClick = (category, index) => () => {
     let temp = new Array(...scored);
-    temp[index] = !temp[index];
+    temp[index] = category(roll);
     setScored(temp);
     submitScore(category);
   };
@@ -27,8 +27,8 @@ const ScoreTable = ({ roll, section, submitScore }) => {
                 <td>{row.category}</td>
                 <td>{row.description}</td>
                 <td>
-                  {scored[i] ? (
-                    row.calc(roll)
+                  {scored[i] > -1 ? (
+                    scored[i]
                   ) : (
                     <button
                       onClick={handleClick(row.calc, i)}

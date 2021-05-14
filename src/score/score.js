@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import text from './constants'
 import ScoreTable from './scoreTable'
 
