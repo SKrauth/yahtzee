@@ -30,8 +30,10 @@ const Dice = ({ roll, setRoll, rollCount, setRollCount, hold, setHold }) => {
           <div key={`dice-${i}`} className="dice-box">
             {val ? (
               <>
-                <h3>{val}</h3>
-                <button onClick={handleNewHold(i)}>
+                <div className="dice">
+                  <h3>{val}</h3>
+                </div>
+                <button onClick={handleNewHold(i)} className={hold[i] ? "btn release-btn" : "btn hold-btn"}>
                   {hold[i] ? "Release" : "Hold"}
                 </button>
               </>
@@ -40,8 +42,12 @@ const Dice = ({ roll, setRoll, rollCount, setRollCount, hold, setHold }) => {
         ))}
       </div>
       <div>
-        <button onClick={handleNewRoll} disable={(rollCount > 3).toString()}>
-          {rollCount < 3 ? `Roll ${rollCount}` : `No Rolls Remaining`}
+        <button onClick={handleNewRoll} disable={(rollCount > 3).toString()} className="btn roll-btn">
+          {rollCount < 3
+            ? rollCount === 0
+              ? `Start Turn`
+              : `Re-Roll ${rollCount} of 2`
+            : `No Rolls Remaining`}
         </button>
       </div>
     </>

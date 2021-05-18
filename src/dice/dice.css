@@ -1,6 +1,29 @@
 .dice-box {
   display: inline-block;
-  width: 18%;
-  height: 50px;
-  border: 1px solid green;
+  width: 60px;
+  height: 60px;
+  border: 2px solid black;
+  margin: 1.5%;
+  border-radius: 9px;
+}
+
+.btn {
+  display: inline-block;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.release-btn {
+  background-color: red;
+}
+
+.hold-btn {
+  background-color: green;
+}
+
+.roll-btn {
+  background-color: darkgrey;
 }
