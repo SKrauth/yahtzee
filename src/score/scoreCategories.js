@@ -9,6 +9,8 @@ const sumDice = roll => {
 
 const sumOfType = val => roll => roll.filter(num => num === val).length * val;
 
+const upperBonus = score => (score >= 63 ? 35 : 0);
+
 const threeOfAKind = roll => {
   let score = 0;
   let orderedDice = sortDice(roll);
@@ -126,6 +128,7 @@ const chance = roll => {
 
 const scoreCategories = {
   sumOfType,
+  upperBonus,
   threeOfAKind,
   fourOfAKind,
   fullHouse,

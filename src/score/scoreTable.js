@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./score.css";
 
 const ScoreTable = ({ roll, section, submitScore }) => {
-  let [scored, setScored] = useState(new Array(section.length).fill(-1));
+  let [scored, setScored] = useState(new Array(section.length).fill(null));
 
   const handleClick = (category, index) => () => {
     let temp = new Array(...scored);
@@ -10,6 +10,8 @@ const ScoreTable = ({ roll, section, submitScore }) => {
     setScored(temp);
     submitScore(category);
   };
+
+  const sectionTotal = scored.reduce((a, b) => a + b, 0);
 
   return (
     <table className="score-table">
@@ -27,13 +29,12 @@ const ScoreTable = ({ roll, section, submitScore }) => {
                 <td>{row.category}</td>
                 <td>{row.description}</td>
                 <td>
-                  {scored[i] > -1 ? (
+                  {scored[i] !== null ? (
                     scored[i]
+                  ) : row.bonus ? (
+                    row.calc(sectionTotal)
                   ) : (
-                    <button
-                      onClick={handleClick(row.calc, i)}
-                      disable={scored[i].toString()}
-                    >
+                    <button onClick={handleClick(row.calc, i)}>
                       Submit {row.calc ? row.calc(roll) : ""}
                     </button>
                   )}
@@ -42,6 +43,14 @@ const ScoreTable = ({ roll, section, submitScore }) => {
             ))
           : null}
       </tbody>
+      <tfoot>
+        <td colspan="2">Total:</td>
+        <td>
+          {section[section.length - 1].bonus
+            ? sectionTotal + section[section.length - 1].calc(sectionTotal)
+            : sectionTotal}
+        </td>
+      </tfoot>
     </table>
   );
 };
