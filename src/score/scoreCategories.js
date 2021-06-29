@@ -114,7 +114,8 @@ const yahtzee = roll => {
     orderedDice[0] === orderedDice[1] &&
     orderedDice[0] === orderedDice[2] &&
     orderedDice[0] === orderedDice[3] &&
-    orderedDice[0] === orderedDice[4]
+    orderedDice[0] === orderedDice[4] &&
+    orderedDice[0] !== 0
   ) {
     score = 50;
   }

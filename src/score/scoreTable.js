@@ -44,12 +44,14 @@ const ScoreTable = ({ roll, section, submitScore }) => {
           : null}
       </tbody>
       <tfoot>
-        <td colspan="2">Total:</td>
-        <td>
-          {section[section.length - 1].bonus
-            ? sectionTotal + section[section.length - 1].calc(sectionTotal)
-            : sectionTotal}
-        </td>
+        <tr>
+          <td colSpan="2">Total:</td>
+          <td>
+            {section[section.length - 1].bonus
+              ? sectionTotal + section[section.length - 1].calc(sectionTotal)
+              : sectionTotal}
+          </td>
+        </tr>
       </tfoot>
     </table>
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Dice from "./dice/dice";
 import Score from "./score/score";
+import EndGame from "./endgame/endgame";
 
 function App() {
   let [turn, setTurn] = useState(0);
@@ -18,6 +19,14 @@ function App() {
     setRollCount(0);
   };
 
+  let newGame = () => {
+    setTotalScore(0);
+    setTurn(0);
+    setRoll([0, 0, 0, 0, 0]);
+    setHold([false, false, false, false, false]);
+    setRollCount(0);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -25,14 +34,17 @@ function App() {
         <h2 className="header-item pull-right">Score: {totalScore}</h2>
       </header>
       <div className="container">
-        <Dice
-          roll={roll}
-          setRoll={setRoll}
-          hold={hold}
-          setHold={setHold}
-          rollCount={rollCount}
-          setRollCount={setRollCount}
-        />
+        {turn >= 13 ?
+          <EndGame handleClick={newGame} score={totalScore} /> :
+          <Dice
+            roll={roll}
+            setRoll={setRoll}
+            hold={hold}
+            setHold={setHold}
+            rollCount={rollCount}
+            setRollCount={setRollCount}
+          />
+        }
         <hr />
         <Score roll={roll} takeTurn={takeTurn} />
       </div>
