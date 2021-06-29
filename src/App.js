@@ -11,6 +11,9 @@ function App() {
   let [hold, setHold] = useState([false, false, false, false, false]);
   let [rollCount, setRollCount] = useState(0);
 
+  // key for score component reset, could hold a prev game state too?
+  let [gameCount, setGameCound] = useState(0);
+
   let takeTurn = score => {
     setTotalScore(totalScore + score);
     setTurn(turn + 1);
@@ -25,6 +28,7 @@ function App() {
     setRoll([0, 0, 0, 0, 0]);
     setHold([false, false, false, false, false]);
     setRollCount(0);
+    setGameCound(gameCount + 1)
   }
 
   return (
@@ -46,7 +50,7 @@ function App() {
           />
         }
         <hr />
-        <Score roll={roll} takeTurn={takeTurn} />
+        <Score roll={roll} takeTurn={takeTurn} key={gameCount} />
       </div>
     </div>
   );

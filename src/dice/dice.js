@@ -27,10 +27,10 @@ const Dice = ({ roll, setRoll, rollCount, setRollCount, hold, setHold }) => {
     <>
       <div>
         {roll.map((val, i) =>
-          val ? (
+          (
             <div key={`dice-${i}`} className="dice-box">
               <div className="dice">
-                <h3>{val}</h3>
+                <h3 style={{color: val ? 'black' : 'white'}}>{val}</h3>
               </div>
               <button
                 onClick={handleNewHold(i)}
@@ -39,7 +39,7 @@ const Dice = ({ roll, setRoll, rollCount, setRollCount, hold, setHold }) => {
                 {hold[i] ? "Release" : "Hold"}
               </button>
             </div>
-          ) : null
+          )
         )}
       </div>
       <div>

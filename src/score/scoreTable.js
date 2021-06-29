@@ -34,7 +34,7 @@ const ScoreTable = ({ roll, section, submitScore }) => {
                   ) : row.bonus ? (
                     row.calc(sectionTotal)
                   ) : (
-                    <button onClick={handleClick(row.calc, i)}>
+                    <button onClick={handleClick(row.calc, i)} className="btn hold-btn">
                       Submit {row.calc ? row.calc(roll) : ""}
                     </button>
                   )}
