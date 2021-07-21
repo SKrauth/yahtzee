@@ -3,6 +3,8 @@ import "./App.css";
 import Dice from "./dice/dice";
 import Score from "./score/score";
 import EndGame from "./endgame/endgame";
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+
 
 function App() {
   let [turn, setTurn] = useState(0);
@@ -37,6 +39,7 @@ function App() {
         <h2 className="header-item pull-left">Turn: {turn} of 13</h2>
         <h2 className="header-item pull-right">Score: {totalScore}</h2>
       </header>
+      <AmplifySignOut />
       <div className="container">
         {turn >= 13 ?
           <EndGame handleClick={newGame} score={totalScore} /> :
@@ -56,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
